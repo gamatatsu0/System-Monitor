@@ -11,7 +11,6 @@ from PySide2.QtCore import QObject, Signal, QTimer
 
 import psutil
 
-import '/Source/Process/Processes'
 
 class MainWindow(QObject):
     def __init__(self):
