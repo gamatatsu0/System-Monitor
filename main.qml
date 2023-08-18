@@ -2,6 +2,7 @@ import QtQuick 2.1
 import QtQuick.Window 2.1
 //import QtQuick.Layouts 2.15
 import "UI/Gauges"
+import "UI/RAM"
 
 Window {
     id: mainWindows
@@ -24,9 +25,8 @@ Window {
         }
         function onPrintProcess(proc) {
             mainWindows.myDictionary = proc
-            console.log(mainWindows.myDictionary[1].name)
 
-            //            console.log( typeof(proc.id1))
+            //                        console.log( proc)
             //            section2Proc.myColor = "green"
         }
         function onPrintNVMETemperature(temp) {
@@ -105,7 +105,7 @@ Window {
             Rectangle {
                 id: tile3
 
-                color: "grey"
+                color: "pink"
                 width: parent.width / 4.2
                 height: parent.height - 10
 
@@ -118,7 +118,10 @@ Window {
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 5
 
-                //                Ram{}
+                Ram{
+                    id:ramHolder
+
+                }
             }
 
             Rectangle {
@@ -191,7 +194,7 @@ Window {
                 Rectangle{
                     height: 20
                     width: procHolder.width/5
-                    Text{text:"UserName"}
+                    Text{text:"Memeory %"}
                 }
                 Rectangle{
                     height: 20
@@ -236,25 +239,25 @@ Window {
                             width: procHolder.width/5
 
                             Text{
-                                text:mainWindows.myDictionary[index].username}
+                                text:mainWindows.myDictionary[index].memory_percent}
 
                         }
-                                                Rectangle{
-                                                    height: 20
-                                                    width: procHolder.width/5
+                        Rectangle{
+                            height: 20
+                            width: procHolder.width
+                            Text{
+                                text:mainWindows.myDictionary[index].memory_info}
 
-                                                    Text{
-                                                        text:mainWindows.myDictionary[index].cmdline}
+                        }
+                        Rectangle{
+                            height: 20
+                            width: procHolder.width/5
 
-                                                }
-                                                Rectangle{
-                                                    height: 20
-                                                    width: procHolder.width/5
+                            Text{
+                                text:mainWindows.myDictionary[index].cpu_times}
 
-                                                    Text{
-                                                        text:mainWindows.myDictionary[index].cpu_time}
+                        }
 
-                                                }
 
 
 
@@ -263,7 +266,6 @@ Window {
             }
         }
     }
-
     // Section 3 rectangle holds larger graphics
     Rectangle {
         id: section3

@@ -1,3 +1,3 @@
 {
-    "files": ["main.qml","main.py","Temperature.qml","RoundGauge.qml","Ram.qml","ROundGaugesOne.qrc","UI/Gauges/RoundGauge.qml","ProcList.qml","Source/Process/Processes.py","Processes.qml","RoundGaugeWidget.qrc","Source/CPU/CpuUsage.py"]
+    "files": ["Temperature.qml","Ram.qml","ProcList.qml","Processes.qml","Source/CPU/CpuUsage.py","main.py","ROundGaugesOne.qrc","UI/Gauges/RoundGauge.qml","Source/Process/Processes.py","Source/Sensors/Temperature.py","main.qml","RoundGaugeWidget.qrc","RoundGauge.qml","Source/Sensors/Fans.py"]
 }

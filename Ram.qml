@@ -8,9 +8,9 @@ ChartView {
     theme: ChartView.ChartThemeBrownSand
     antialiasing: true
 
-    PieSeries {
-        id: pieSeries
-        PieSlice { label: "eaten"; value: 94.9 }
-        PieSlice { label: "not yet eaten"; value: 5.1 }
-    }
+//    PieSeries {
+//        id: pieSeries
+//        PieSlice { label: "eaten"; value: 94.9 }
+//        PieSlice { label: "not yet eaten"; value: 5.1 }
+//    }
 }

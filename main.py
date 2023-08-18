@@ -4,6 +4,11 @@ import os
 import datetime
 
 
+import sys
+from pathlib import Path
+
+#from PySide6.QtGui import QGuiApplication
+#from PySide6.QtQml import QQmlApplicationEngine
 
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine
@@ -11,6 +16,9 @@ from PySide2.QtCore import QObject, Signal, QTimer
 
 import psutil
 
+import Source.Process.Processes as myProc
+import Source.Sensors.Temperature as temp
+import Source.Sensors.Fans as fans
 
 class MainWindow(QObject):
     def __init__(self):
@@ -25,6 +33,9 @@ class MainWindow(QObject):
         self.timer.start(100)
         self.timerForProc.start(1000)
 
+        self.generalTemp = temp.Temperature()
+
+
     # CPU signals
     printCPU = Signal(str)
     printCPUCount = Signal(str)
@@ -33,6 +44,7 @@ class MainWindow(QObject):
     printNVMETemperature = Signal(str)
     # Processes
     printProcess = Signal('QVariant')
+
 
     def setMainCall(self):
         self.setCPU()
@@ -51,15 +63,10 @@ class MainWindow(QObject):
 
        ################################ Temperature ################################
     def setCPUTemperature(self):
-        temp = (psutil.sensors_temperatures(fahrenheit=True))
-        cpuTemp = str(temp.get("pch_cometlake")[0][1])
-#        print(temp.get("pch_cometlake")[0][1])
-        self.printCPUTemperature.emit(cpuTemp)
+        self.printCPUTemperature.emit(self.generalTemp.get_cpu_temperature())
 
     def setNVMETemperature(self):
-        temp = (psutil.sensors_temperatures(fahrenheit=True))
-        nvmeTemp = str(temp.get("nvme")[0][1])
-        self.printNVMETemperature.emit(nvmeTemp)
+        self.printNVMETemperature.emit(self.generalTemp.get_nvme_temperature())
 
        ################################ Ram Usage  Informatin ################################3
     def setRAMTotal(self):
@@ -85,18 +92,35 @@ class MainWindow(QObject):
 
         ################################ Get Processes Information ################################
     def setProcessList(self):
-        listOfJobs = []
+        listOfJobs = myProc.Processes()
 
-        for p in psutil.process_iter(['pid','name', 'username', 'cmdline', 'cpu_times']):
 
-            listOfJobs.append(p.info)
+#        for p in psutil.process_iter(['pid','name', 'username', 'cmdline', 'cpu_times']):
 
-        listOfJobs.append(p.info)
+#            listOfJobs.append(p.info)
 
-        self.printProcess.emit(listOfJobs)
+#        listOfJobs.append(p.info)
+
+        self.printProcess.emit(listOfJobs.get_process_most())
 
 
 if __name__ == "__main__":
+
+#    app = QGuiApplication(sys.argv)
+#    engine = QQmlApplicationEngine()
+#    main = MainWindow()
+
+
+#    engine.rootContext().setContextProperty("backend", main)
+
+##    qml_file = Path(__file__).resolve().parent / "main.qml"
+#    engine.load(os.path.join(os.path.dirname(__file__), "main.qml"))
+##    engine.load(qml_file)
+
+#    if not engine.rootObjects():
+#        sys.exit(-1)
+#    sys.exit(app.exec())
+
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
 
