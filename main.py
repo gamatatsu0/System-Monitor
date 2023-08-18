@@ -34,6 +34,7 @@ class MainWindow(QObject):
         self.timerForProc.start(1000)
 
         self.generalTemp = temp.Temperature()
+        self.sysFans = fans.Fans()
 
 
     # CPU signals
@@ -42,6 +43,9 @@ class MainWindow(QObject):
     # Temperature Signals
     printCPUTemperature = Signal(str)
     printNVMETemperature = Signal(str)
+    printWIFITemperature = Signal(str)
+    # Fan Speed Signals
+    printFansSpeed = Signal(str)
     # Processes
     printProcess = Signal('QVariant')
 
@@ -50,6 +54,8 @@ class MainWindow(QObject):
         self.setCPU()
         self.setCPUTemperature()
         self.setNVMETemperature()
+        self.setWifiTemperature()
+        self.setFansSpeed()
 #        self.setProcessList()
 
         ################################ CPU Usage Information ################################
@@ -64,10 +70,13 @@ class MainWindow(QObject):
        ################################ Temperature ################################
     def setCPUTemperature(self):
         self.printCPUTemperature.emit(self.generalTemp.get_cpu_temperature())
-
     def setNVMETemperature(self):
         self.printNVMETemperature.emit(self.generalTemp.get_nvme_temperature())
-
+    def setWifiTemperature(self):
+        self.printWIFITemperature.emit(self.generalTemp.get_wifi_temperature())
+        ################################ Fans ################################
+    def setFansSpeed(self):
+        self.printFansSpeed.emit(self.sysFans.get_fan_speed())
        ################################ Ram Usage  Informatin ################################3
     def setRAMTotal(self):
         ramTotal = str(psutil.virtual_memory()[0])
@@ -93,14 +102,6 @@ class MainWindow(QObject):
         ################################ Get Processes Information ################################
     def setProcessList(self):
         listOfJobs = myProc.Processes()
-
-
-#        for p in psutil.process_iter(['pid','name', 'username', 'cmdline', 'cpu_times']):
-
-#            listOfJobs.append(p.info)
-
-#        listOfJobs.append(p.info)
-
         self.printProcess.emit(listOfJobs.get_process_most())
 
 

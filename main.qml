@@ -25,13 +25,18 @@ Window {
         }
         function onPrintProcess(proc) {
             mainWindows.myDictionary = proc
-
-            //                        console.log( proc)
-            //            section2Proc.myColor = "green"
         }
         function onPrintNVMETemperature(temp) {
 
             tile2Temperature.nvmeTemperatureValuePassed = temp
+        }
+        function onPrintWIFITemperature(temp) {
+
+            tile2Temperature.wifiTemperatureValuePassed = temp
+        }
+        function onPrintFansSpeed(speed) {
+
+            tile2Temperature.fanSpeedValuePassed = speed
         }
     }
 
@@ -100,6 +105,10 @@ Window {
                     cpuTemperatureLabelSizePassed: 10
                     cpuTemperatureValuePassed: "0"
                     nvmeTemperatureValuePassed: "0"
+                    wifiTemperatureValuePassed: "0"
+                    fanSpeedValuePassed: "0"
+
+
                 }
             }
             Rectangle {

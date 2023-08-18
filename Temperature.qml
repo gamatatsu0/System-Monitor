@@ -14,6 +14,14 @@ Item {
     // NVME Label Properties
     property string nvmeTemperatureValuePassed: "Value"
 
+    // WIFI Label Properties
+    property string wifiTemperatureValuePassed: "Value"
+
+    // Fan Speed
+    property string fanSpeedValuePassed: "Value"
+
+
+
 
     // Font Properties
     property int cpuTemperatureLabelSizePassed:  10
@@ -23,7 +31,7 @@ Item {
     property int titleFont: 15
 
 
-// Main rectangle that holds ALL the temperature information
+    // Main rectangle that holds ALL the temperature information
     Rectangle{
         id:cpuTemperatureSection
 
@@ -47,7 +55,7 @@ Item {
             Text {
                 id: tileLabel
                 text: "Temperature"
-//                anchors.top: parent.top
+                //                anchors.top: parent.top
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 font.pointSize: temperature.titleFont
@@ -76,6 +84,7 @@ Item {
             }
         }
 
+
         Rectangle{
             id:nvmeTemperatureHolder
             width: parent.width
@@ -92,6 +101,55 @@ Item {
                 color:temperature.textColor
             }
         }
+
+        // The CPU Temperature information
+        Rectangle{
+            id:wifiTemperatureHolder
+            width: parent.width
+            height: 20
+            color: "transparent"
+
+            anchors.top: nvmeTemperatureHolder.bottom
+
+            Text {
+                id: wifiTemperatureValue
+                text: "WI-FI :::" + temperature.wifiTemperatureValuePassed
+
+                font.pointSize: temperature.cpuTemperatureLabelSizePassed
+                font.family: temperature.textFontFamily
+                color:temperature.textColor
+            }
+        }
+        // This row holds the the fan icon and the fan speed in HZ
+        Rectangle{
+            id:fanSpeedHolder
+            width: parent.width
+            height: 20
+            color: "transparent"
+
+
+
+
+        }
+        Row{            anchors.top: wifiTemperatureHolder.bottom
+            anchors.topMargin: 10
+            Image {
+                id: fanImage
+                source: "./Resources/Images/white-fan-48.png"
+
+                Text{
+                    id: fanSpeedValue
+                    text: temperature.fanSpeedValuePassed + " RPM"
+
+                    anchors.left: fanImage.right
+                    font.pointSize: temperature.cpuTemperatureLabelSizePassed
+                    font.family: temperature.textFontFamily
+                    color:temperature.textColor
+                }
+
+            }
+        }
+
 
     }
 
