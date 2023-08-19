@@ -19,6 +19,7 @@ import psutil
 import Source.Process.Processes as myProc
 import Source.Sensors.Temperature as temp
 import Source.Sensors.Fans as fans
+import Source.Memory.Memory as memory
 
 class MainWindow(QObject):
     def __init__(self):
@@ -35,6 +36,7 @@ class MainWindow(QObject):
 
         self.generalTemp = temp.Temperature()
         self.sysFans = fans.Fans()
+        self.myMemory = memory.Memory()
 
 
     # CPU signals
@@ -48,6 +50,8 @@ class MainWindow(QObject):
     printFansSpeed = Signal(str)
     # Processes
     printProcess = Signal('QVariant')
+    # Ram
+    printRamTotal = Signal('QVariant')
 
 
     def setMainCall(self):
@@ -56,8 +60,7 @@ class MainWindow(QObject):
         self.setNVMETemperature()
         self.setWifiTemperature()
         self.setFansSpeed()
-#        self.setProcessList()
-
+        self.setRAMTotal()
         ################################ CPU Usage Information ######################
     def setCPU(self): # the number in the () bellow is for the interval that i used to measure the CPU
         cpu = str(psutil.cpu_percent(1))
@@ -78,10 +81,11 @@ class MainWindow(QObject):
         ################################ Fans ######################################
     def setFansSpeed(self):
         self.printFansSpeed.emit(self.sysFans.get_fan_speed())
+        self.myMemory.get_memory_used()
 
        ################################ Ram Usage  Informatin #######################
     def setRAMTotal(self):
-        ramTotal = str(psutil.virtual_memory()[0])
+        ramTotal = (self.myMemory.get_memory_used())
         self.printRamTotal.emit(ramTotal)
 
     def setRAMAvailable(self):
@@ -108,21 +112,6 @@ class MainWindow(QObject):
 
 
 if __name__ == "__main__":
-
-#    app = QGuiApplication(sys.argv)
-#    engine = QQmlApplicationEngine()
-#    main = MainWindow()
-
-
-#    engine.rootContext().setContextProperty("backend", main)
-
-##    qml_file = Path(__file__).resolve().parent / "main.qml"
-#    engine.load(os.path.join(os.path.dirname(__file__), "main.qml"))
-##    engine.load(qml_file)
-
-#    if not engine.rootObjects():
-#        sys.exit(-1)
-#    sys.exit(app.exec())
 
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()

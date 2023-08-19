@@ -13,6 +13,7 @@ Window {
     color: 'black'
 
     property variant myDictionary: ({})
+    property variant myRam: ({})
 
     Connections {
         target: backend
@@ -40,6 +41,12 @@ Window {
         function onPrintFansSpeed(speed) {
 
             tile2Temperature.fanSpeedValuePassed = speed
+        }
+        function onPrintRamTotal(ram){
+            // dict_keys(['total', 'available', 'percent', 'used', 'free', 'active', 'inactive', 'buffers', 'cached', 'shared', 'slab'])
+            mainWindows.myRam = ram
+            console.log(mainWindows.myRam)
+
         }
     }
 
@@ -131,7 +138,8 @@ Window {
                 anchors.bottomMargin: 5
 
                 Ram{
-                    id:ramHolder
+                    id:tile3Ram
+                    ramDictPassed : mainWindows.myRam
 
                 }
             }
