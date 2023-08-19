@@ -16,6 +16,9 @@ class Fans:
         # returns a dict so but
         #we cant call by name because we may encounter different models
         fanInfo = psutil.sensors_fans().popitem()
-        fanName = str(fanInfo[1][1][1])
+        fanName = str(fanInfo[1][1][1]) + "RPM"
+        if fanName == "0RPM":
+            return "OFF"
+        else:
+            return fanName
 
-        return fanName

@@ -18,12 +18,15 @@ Window {
         target: backend
 
         function onPrintCPU(cpu) {
+
             tile1Gauge.cpuValue = cpu
         }
         function onPrintCPUTemperature(temp) {
+
             tile2Temperature.cpuTemperatureValuePassed = temp
         }
         function onPrintProcess(proc) {
+
             mainWindows.myDictionary = proc
         }
         function onPrintNVMETemperature(temp) {
@@ -249,14 +252,12 @@ Window {
 
                             Text{
                                 text:mainWindows.myDictionary[index].memory_percent}
-
                         }
                         Rectangle{
                             height: 20
                             width: procHolder.width
                             Text{
                                 text:mainWindows.myDictionary[index].memory_info}
-
                         }
                         Rectangle{
                             height: 20
@@ -264,11 +265,7 @@ Window {
 
                             Text{
                                 text:mainWindows.myDictionary[index].cpu_times}
-
                         }
-
-
-
 
                     }
                 }

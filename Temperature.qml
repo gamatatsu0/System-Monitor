@@ -139,7 +139,7 @@ Item {
 
                 Text{
                     id: fanSpeedValue
-                    text: temperature.fanSpeedValuePassed + " RPM"
+                    text: temperature.fanSpeedValuePassed
 
                     anchors.left: fanImage.right
                     font.pointSize: temperature.cpuTemperatureLabelSizePassed

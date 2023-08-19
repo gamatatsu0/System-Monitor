@@ -58,7 +58,7 @@ class MainWindow(QObject):
         self.setFansSpeed()
 #        self.setProcessList()
 
-        ################################ CPU Usage Information ################################
+        ################################ CPU Usage Information ######################
     def setCPU(self): # the number in the () bellow is for the interval that i used to measure the CPU
         cpu = str(psutil.cpu_percent(1))
         self.printCPU.emit(cpu)
@@ -74,10 +74,12 @@ class MainWindow(QObject):
         self.printNVMETemperature.emit(self.generalTemp.get_nvme_temperature())
     def setWifiTemperature(self):
         self.printWIFITemperature.emit(self.generalTemp.get_wifi_temperature())
-        ################################ Fans ################################
+
+        ################################ Fans ######################################
     def setFansSpeed(self):
         self.printFansSpeed.emit(self.sysFans.get_fan_speed())
-       ################################ Ram Usage  Informatin ################################3
+
+       ################################ Ram Usage  Informatin #######################
     def setRAMTotal(self):
         ramTotal = str(psutil.virtual_memory()[0])
         self.printRamTotal.emit(ramTotal)
@@ -99,7 +101,7 @@ class MainWindow(QObject):
         ramFree = str(psutil.virtual_memory()[4])
         self.printRamFree.emit(ramFree)
 
-        ################################ Get Processes Information ################################
+        ################################ Get Processes Information ###################
     def setProcessList(self):
         listOfJobs = myProc.Processes()
         self.printProcess.emit(listOfJobs.get_process_most())
