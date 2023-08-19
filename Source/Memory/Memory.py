@@ -34,6 +34,7 @@ class Memory:
         mem[2] = memory[2]
         return (mem)
 
+# Need to pass to GUI later
 
 
     def get_swap_memory_used(self):
