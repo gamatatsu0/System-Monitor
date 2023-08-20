@@ -45,7 +45,7 @@ Window {
         function onPrintRamTotal(ram){
             // dict_keys(['total', 'available', 'percent', 'used', 'free', 'active', 'inactive', 'buffers', 'cached', 'shared', 'slab'])
             mainWindows.myRam = ram
-            console.log(mainWindows.myRam)
+            console.log(mainWindows.myRam[1])
 
         }
     }

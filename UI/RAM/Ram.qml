@@ -10,7 +10,7 @@ import QtQuick.Layouts 1.15
 Item{
 
     property variant ramDictPassed: ({})
-//dict_keys(['total', 'available', 'percent', 'used', 'free', 'active', 'inactive', 'buffers', 'cached', 'shared', 'slab'])
+//dict_keys(['total', 'available', 'percent', 'used', (used Calculated), 'active', 'inactive', 'buffers', 'cached', 'shared', 'slab'])
 ColumnLayout{
     spacing: 2
 
@@ -19,25 +19,14 @@ ColumnLayout{
         Layout.preferredWidth: parent.width *90
         Layout.preferredHeight: 20
         ProgressBar{
-        value: Number((ramDictPassed[1]/1000000)/1000).toLocaleString(Qt.locale("de_DE"))
+        value: ramDictPassed[4]
         }
 
         Text{
-        text:  "Memory : " + Number((ramDictPassed[0]/1000000)/1000).toLocaleString(Qt.locale("de_DE"))
-
+        text:  "Memory : " + ramDictPassed[0]
         }
     }
 
-    Rectangle {
-        Layout.alignment: Qt.AlignRight
-        Layout.preferredWidth: parent.width *90
-        Layout.preferredHeight: 20
-        ProgressBar{
-        value: 0.5
-        }
-        Text{
-        text: "Virtual Memory"}
-    }
 
     Rectangle {
         Layout.alignment: Qt.AlignBottom
