@@ -55,10 +55,7 @@ class Memory:
         mem[0],mem[1],mem[2],mem[3]  = swap[0],swap[1],swap[2],0
         mem = self.normalize_data(mem)
         mem[0],mem[3] = self.adjust_decimal_percision(self.adjust_percision_Megabytes(swap[0])/1000), swap[3]
-
         mem[5] = 1 - mem[1]
-        print((mem))
-
         return list(mem)
 
 

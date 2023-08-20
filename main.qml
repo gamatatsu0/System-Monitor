@@ -51,8 +51,6 @@ Window {
         function onPrintSwapTotal(swap){
             // dict_keys(['total', 'available', 'percent', 'used', 'free', 'active', 'inactive', 'buffers', 'cached', 'shared', 'slab'])
             mainWindows.mySwap = swap
-            console.log(mainWindows.mySwap[0])
-
         }
     }
 
@@ -146,7 +144,7 @@ Window {
                 Ram{
                     id:tile3Ram
                     ramDictPassed : mainWindows.myRam
-                    swapDictPassed : mainWindows.myswap
+                    swapDictPassed : mainWindows.mySwap
 
                 }
             }
