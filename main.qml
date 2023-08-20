@@ -14,6 +14,8 @@ Window {
 
     property variant myDictionary: ({})
     property variant myRam: ({})
+    property variant mySwap: ({})
+
 
     Connections {
         target: backend
@@ -45,7 +47,11 @@ Window {
         function onPrintRamTotal(ram){
             // dict_keys(['total', 'available', 'percent', 'used', 'free', 'active', 'inactive', 'buffers', 'cached', 'shared', 'slab'])
             mainWindows.myRam = ram
-            console.log(mainWindows.myRam[1])
+        }
+        function onPrintSwapTotal(swap){
+            // dict_keys(['total', 'available', 'percent', 'used', 'free', 'active', 'inactive', 'buffers', 'cached', 'shared', 'slab'])
+            mainWindows.mySwap = swap
+            console.log(mainWindows.mySwap[0])
 
         }
     }
@@ -140,6 +146,7 @@ Window {
                 Ram{
                     id:tile3Ram
                     ramDictPassed : mainWindows.myRam
+                    swapDictPassed : mainWindows.myswap
 
                 }
             }

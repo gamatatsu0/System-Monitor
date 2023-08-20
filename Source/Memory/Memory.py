@@ -44,12 +44,23 @@ class Memory:
         mem[4] = 1 - mem[1]
         # This is a numpy array and nneds to be converted to python list
 
-        print((mem[4]))
         return list(mem)
 
 
 # Need to pass to GUI later
-
-
     def get_swap_memory_used(self):
-        swap = psutil.swap_memory()[0]
+        swap = psutil.swap_memory()
+        mem = [0,0,0,0,0,0,0]
+
+        mem[0],mem[1],mem[2],mem[3]  = swap[0],swap[1],swap[2],0
+        mem = self.normalize_data(mem)
+        mem[0],mem[3] = self.adjust_decimal_percision(self.adjust_percision_Megabytes(swap[0])/1000), swap[3]
+
+        mem[5] = 1 - mem[1]
+        print((mem))
+
+        return list(mem)
+
+
+
+

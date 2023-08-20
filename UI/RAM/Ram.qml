@@ -10,6 +10,8 @@ import QtQuick.Layouts 1.15
 Item{
 
     property variant ramDictPassed: ({})
+    property variant swapDictPassed: ({})
+
 //dict_keys(['total', 'available', 'percent', 'used', (used Calculated), 'active', 'inactive', 'buffers', 'cached', 'shared', 'slab'])
 ColumnLayout{
     spacing: 2
@@ -23,7 +25,7 @@ ColumnLayout{
         }
 
         Text{
-        text:  "Memory : " + ramDictPassed[0]
+        text:  "Memory : " + ramDictPassed[0] + " GB"
         }
     }
 
@@ -34,11 +36,12 @@ ColumnLayout{
         Layout.preferredWidth: parent.width *90
         Layout.preferredHeight: 20
         ProgressBar{
-        value: 0.5
+        value: swapDictPassed[5]
         }
 
         Text{
-        text: "Swap Memory"}
+        text: "Swap Memory : " + swapDictPassed[0] + " GB"
+        }
     }
 }
 }

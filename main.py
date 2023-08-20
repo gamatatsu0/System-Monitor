@@ -52,6 +52,7 @@ class MainWindow(QObject):
     printProcess = Signal('QVariant')
     # Ram
     printRamTotal = Signal('QVariant')
+    printSwapTotal = Signal("QVariant")
 
 
     def setMainCall(self):
@@ -61,6 +62,7 @@ class MainWindow(QObject):
         self.setWifiTemperature()
         self.setFansSpeed()
         self.setRAMTotal()
+        self.setSwap()
         ################################ CPU Usage Information ######################
     def setCPU(self): # the number in the () bellow is for the interval that i used to measure the CPU
         cpu = str(psutil.cpu_percent(1))
@@ -88,22 +90,9 @@ class MainWindow(QObject):
         ramTotal = (self.myMemory.get_memory_used())
         self.printRamTotal.emit(ramTotal)
 
-    def setRAMAvailable(self):
-        ramAvailable = str(psutil.virtual_memory()[1])
-        self.printRamAvailable.emit(ramAvailable)
-
-    def setRAMUsagePercent(self):
-        # The usage is the number 2 index in the tuple
-        ramUsagePercent = str(psutil.virtual_memory()[2])
-        self.printRamUsagePercent.emit(ramUsagePercent)
-
-    def setRAMUsage(self):
-        ramUsage = str(psutil.virtual_memory()[3])
-        self.printRamUsage.emit(ramUsage)
-
-    def setRAMFree(self):
-        ramFree = str(psutil.virtual_memory()[4])
-        self.printRamFree.emit(ramFree)
+    def setSwap(self):
+        swapTotal = (self.myMemory.get_swap_memory_used())
+        self.printSwapTotal.emit(swapTotal)
 
         ################################ Get Processes Information ###################
     def setProcessList(self):
