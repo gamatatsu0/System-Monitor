@@ -33,7 +33,7 @@ class Memory:
 
     def get_memory_used(self):
         memory = psutil.virtual_memory()
-        mem = [0,1,2,3,4,5,6]
+        mem = [] * 7
         # The 0 bellow is a holder to not throw off the the normalization
         mem[0],mem[1],mem[2],mem[3]  = memory[0],memory[1],0,memory[3]
         mem = self.normalize_data(mem)
@@ -50,7 +50,7 @@ class Memory:
 # Need to pass to GUI later
     def get_swap_memory_used(self):
         swap = psutil.swap_memory()
-        mem = [0,0,0,0,0,0,0]
+        mem = [] * 7
 
         mem[0],mem[1],mem[2],mem[3]  = swap[0],swap[1],swap[2],0
         mem = self.normalize_data(mem)
